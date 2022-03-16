@@ -1,0 +1,26 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<div class="d-flex flex-row flex-wrap statically-sized-cards justify-content-center align-items-stretch">
+    {% for blogger in blogger_list %}
+    <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
+        <div class="card-header d-flex flex-row flex-wrap">
+            <h5 class="card-title">{{ blogger.user.username|truncatechars:18 }}</h5>
+            <span class="text-muted ms-auto">blogs written: {{ blogger.blog_set.count }}</spam>
+        </div>
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{ blogger.user.first_name|add:" "|add:blogger.user.last_name|truncatechars:100}}</h6>
+            <p class="card-text">
+                {% with blogger.bio|truncatechars:200 as truncated %}
+                {{ truncated }}
+                {% if truncated|length < blogger.bio|length %}
+                <a href="{{ blogger.get_absolute_url }}">[Read more]</a>
+                {% endif %}
+                {% endwith %}
+            </p>
+            <a href="{{ blogger.get_absolute_url }}" class="card-link d-inline-block">Blogger page</a>
+            <a href="{{ blogger.get_last_blog.get_absolute_url }}" class="card-link d-inline-block">Last blog</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.db import models
 from .blogger import Blogger
-from . import helpers
+from django.urls import reverse
+from django.template.defaultfilters import truncatechars
 
 class Blog(models.Model):
     class Meta:
@@ -25,6 +26,8 @@ class Blog(models.Model):
     _max_title_show = 50
     
     def __str__(self) -> str:
-        shortened_title = helpers.custom_shorten(self.title, Blog._max_title_show)
+        shortened_title = truncatechars(self.title, Blog._max_title_show)
         return f'(by {self.author} | {self.post_date.strftime("%x %X")}) {shortened_title}'
     
+    def get_absolute_url(self):
+        return reverse('blog:blog-detail', args=(self.id,))

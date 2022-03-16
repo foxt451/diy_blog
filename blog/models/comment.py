@@ -1,8 +1,7 @@
 from django.db import models
 from .blog import Blog
 from django.contrib.auth.models import User
-from django.contrib import admin
-from . import helpers
+from django.template.defaultfilters import truncatechars
 
 
 class Comment(models.Model):
@@ -33,5 +32,6 @@ class Comment(models.Model):
         help_text='Time when comment was posted'
     )
     
+    _max_content_show = 75
     def __str__(self) -> str:
-        return helpers.custom_shorten(self.content, 75)
+        return truncatechars(self.content, Comment._max_content_show)

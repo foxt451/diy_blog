@@ -1,1 +1,27 @@
 {% extends 'blog/base_generic.html' %}
+{% block content %}
+{% for blog in blog_list %}
+<div class="d-flex flex-column align-items-stretch">
+    <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
+        <div class="card-header">
+            <h5 class="card-title"><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:200 }}</a></h5>
+            <h6 class="card-subtitle mb-2 text-muted">by <a
+                    href="{{ blog.author.get_absolute_url }}">{{ blog.author|truncatechars:200 }}</a></h6>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                {% with blog.content|truncatechars:200 as truncated %}
+                {{ truncated }}
+                {% if truncated|length < blog.content|length %}
+                <a href="{{ blog.get_absolute_url }}">[Read more]</a>
+                {% endif %}
+                {% endwith %}
+            </p>
+        </div>
+        <div class="card-footer text-muted">
+            {{ blog.post_date }}
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock  %}

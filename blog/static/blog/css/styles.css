@@ -1,0 +1,7 @@
+nav {
+    background-color: rgb(54, 4, 44);
+}
+
+.statically-sized-cards .card{
+    width: 18rem;
+}

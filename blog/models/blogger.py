@@ -1,5 +1,7 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Blogger(models.Model):
     class Meta:
@@ -18,3 +20,9 @@ class Blogger(models.Model):
     
     def __str__(self) -> str:
         return f'{self.user.username}'
+    
+    def get_absolute_url(self):
+        return reverse('blog:blogger-detail', args=(self.id,))
+    
+    def get_last_blog(self):
+        return self.blog_set.latest('post_date')

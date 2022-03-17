@@ -1,0 +1,13 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<h1 class="text-danger">This is just a playground! This doesn't have anything to do with the project!</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" class="btn btn-primary" value="Litter">
+    </div>
+</form>
+{% endblock %}

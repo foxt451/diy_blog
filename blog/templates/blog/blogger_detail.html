@@ -1,4 +1,20 @@
 {% extends 'blog/base_generic.html' %}
 {% block content %}
-{{ blogger }}
+<div class="card mx-lg-3 mx-md-2 mx-1 my-2 align-self-stretch">
+    <div class="card-header flex-wrap">
+        <p class="card-title h5">{{ blogger.user.username }}</p>
+        <span class="text-muted ms-auto">blogs written: {{ blogger.blog_set.count }}</spam>
+    </div>
+    <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">{{ blogger.user.first_name }} {{ blogger.user.last_name}}</h6>
+        <h6>Bio:</h6>
+        <p class="card-text">
+            {{ blogger.bio }}
+        </p>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'blog:blogs-of-blogger' blogger.id %}" class="card-link d-inline-block">Author's blogs</a>
+        <a href="{{ blogger.get_last_blog.get_absolute_url }}" class="card-link d-inline-block">Last blog</a>
+    </div>
+</div>
 {% endblock  %}

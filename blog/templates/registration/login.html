@@ -1,0 +1,27 @@
+{% extends 'blog/base_generic.html' %}
+
+{% block content %}
+{% if next %}
+{% if user.is_authenticated %}
+<p class="text-danger">Sorry, you don't have enough permissions to access this content. Try another account with the
+    required access rights, if you have one.</p>
+{% else %}
+<p class="text-danger">Please, log in first to access this content</p>
+{% endif %}
+{% endif %}
+<form action="" method="post" class="django-form">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Log in">
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+<p class="mt-4">
+    <a href="{% url 'accounts:password_reset' %}">
+        Lost password?
+    </a>
+</p>
+{% endblock %}

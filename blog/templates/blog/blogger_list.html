@@ -4,7 +4,7 @@
     {% for blogger in blogger_list %}
     <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
         <div class="card-header d-flex flex-row flex-wrap">
-            <h5 class="card-title">{{ blogger.user.username|truncatechars:18 }}</h5>
+            <a href="{% url 'blog:blogger-detail' blogger.id %}"><h5 class="card-title text-wrap">{{ blogger.user.username|truncatechars:18 }}</h5></a>
             <span class="text-muted ms-auto">blogs written: {{ blogger.blog_set.count }}</spam>
         </div>
         <div class="card-body">
@@ -17,7 +17,9 @@
                 {% endif %}
                 {% endwith %}
             </p>
-            <a href="{{ blogger.get_absolute_url }}" class="card-link d-inline-block">Blogger page</a>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'blog:blogs-of-blogger' blogger.id %}" class="card-link d-inline-block">Author's blogs</a>
             <a href="{{ blogger.get_last_blog.get_absolute_url }}" class="card-link d-inline-block">Last blog</a>
         </div>
     </div>

@@ -25,7 +25,7 @@
         </button>
         <a class="navbar-brand" href="{% url 'blog:index' %}">DIY Blog</a>
         <div class="collapse navbar-collapse" id="navbarToggler">
-            <div class="navbar-nav">
+            <div class="navbar-nav me-auto">
                 {% with active_url=request.resolver_match.url_name  %}
                 <a class="nav-item nav-link {% if active_url == 'index' %}active{% endif %}"
                     href="{% url 'blog:index' %}" {% if active_url == 'index' %}aria-current="page" {%endif%}>
@@ -39,8 +39,20 @@
                     href="{% url 'blog:bloggers' %}" {% if active_url == 'bloggers' %}aria-current="page" {%endif%}>
                     Bloggers
                 </a>
-                <a class="nav-item nav-link" href="#">Log in</a>
                 {% endwith %}
+            </div>
+            <div class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                <div class="nav-item align-items-start">
+                <a class="btn btn-outline-warning text-wrap text-break" href="#">
+                    User:
+                    {{ request.user.username | truncatechars:20 }}
+                </a>
+                </div>
+                <a class="nav-item nav-link" href="{% url 'accounts:logout'%}">Log out</a>
+                {% else %}
+                <a class="nav-item nav-link" href="{% url 'accounts:login'%}">Log in</a>
+                {% endif %}
             </div>
         </div>
     </nav>

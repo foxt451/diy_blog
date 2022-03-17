@@ -1,12 +1,19 @@
 {% extends 'blog/base_generic.html' %}
 {% block content %}
-{% for blog in blog_list %}
 <div class="d-flex flex-column align-items-stretch">
+    {% for blog in blog_list %}
     <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
         <div class="card-header">
             <h5 class="card-title"><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:200 }}</a></h5>
-            <h6 class="card-subtitle mb-2 text-muted">by <a
-                    href="{{ blog.author.get_absolute_url }}">{{ blog.author|truncatechars:200 }}</a></h6>
+            <h6 class="card-subtitle mb-2 text-muted">by
+                {% if blog.author %} 
+                <a href="{{ blog.author.get_absolute_url }}">
+                    {{ blog.author|truncatechars:200 }}
+                </a>
+                {% else %}
+                    <span class="text-danger">[deleted]</span>
+                {% endif %}
+            </h6>
         </div>
         <div class="card-body">
             <p class="card-text">
@@ -22,6 +29,6 @@
             {{ blog.post_date }}
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock  %}

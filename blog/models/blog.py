@@ -17,6 +17,7 @@ class Blog(models.Model):
         Blogger,
         on_delete=models.SET_NULL,
         null=True,
+        blank=False,
         help_text='Author of the blog'
     )
     

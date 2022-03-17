@@ -1,4 +1,25 @@
 {% extends 'blog/base_generic.html' %}
 {% block content %}
-{{ blog }}
+<div class="card mx-lg-3 mx-md-2 mx-1 my-2 align-self-stretch">
+    <div class="card-header">
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">by
+            {% if blog.author %}
+            <a href="{{ blog.author.get_absolute_url }}">
+                {{ blog.author|truncatechars:200 }}
+            </a>
+            {% else %}
+            <span class="text-danger">[deleted]</span>
+            {% endif %}
+        </h6>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {{ blog.content|linebreaks }}
+        </p>
+    </div>
+    <div class="card-footer text-muted">
+        {{ blog.post_date }}
+    </div>
+</div>
 {% endblock  %}

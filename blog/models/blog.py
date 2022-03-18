@@ -28,7 +28,7 @@ class Blog(models.Model):
     
     def __str__(self) -> str:
         shortened_title = truncatechars(self.title, Blog._max_title_show)
-        return f'(by {self.author} | {self.post_date.strftime("%x %X")}) {shortened_title}'
+        return f'(by {a if (a:=self.author) else "[deleted]"} | {self.post_date.strftime("%x %X")}) {shortened_title}'
     
     def get_absolute_url(self):
         return reverse('blog:blog-detail', args=(self.id,))

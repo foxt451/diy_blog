@@ -21,5 +21,13 @@
     <div class="card-footer text-muted">
         {{ blog.post_date }}
     </div>
+    {% if blog.author and blog.author.user == user or perms.blog.delete_blog %}
+    <div class="card-footer">
+        <a class="btn btn-danger" href="{% url 'blog:blog-delete' blog.id %}">Delete</a>
+        {% if blog.author and blog.author.user == user %}
+        <a class="btn btn-primary mx-3 px-4" href="{% url 'blog:blog-edit' blog.id %}">Edit</a>
+        {% endif %}
+    </div>
+    {% endif %}
 </div>
 {% endblock  %}

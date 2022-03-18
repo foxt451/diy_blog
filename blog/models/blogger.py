@@ -2,10 +2,12 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.template.defaultfilters import truncatechars
 
 class Blogger(models.Model):
     class Meta:
         ordering = ('user__username',)
+        permissions = [('can_approve_application', 'Can approve applications to be an author')]
     
     user = models.OneToOneField(
         User,
@@ -19,7 +21,7 @@ class Blogger(models.Model):
     )
     
     def __str__(self) -> str:
-        return f'{self.user.username}'
+        return truncatechars(f'{self.user.username}', 30)
     
     def get_absolute_url(self):
         return reverse('blog:blogger-detail', args=(self.id,))

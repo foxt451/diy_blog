@@ -1,0 +1,17 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<h4>Resign as a blogger</h4>
+
+<p>Are you sure you want to resign as an author (all previosly written blogs will lose the information about the author;
+    you will have to reapply if you want to become an author again)?</p>
+
+<form action="" method="post" class="django-form">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" class="btn btn-danger" value="Resign">
+    </div>
+</form>
+{% endblock %}

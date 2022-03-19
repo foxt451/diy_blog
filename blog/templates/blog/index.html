@@ -44,7 +44,7 @@
         {% if request.user.is_authenticated %}
         <img class="card-img-top" src="{% static 'blog/images/profile.webp' %}">
         <div class="card-body d-flex flex-column justify-content-end">
-            <a class="btn btn-light btn-outline-dark d-block" href="#">
+            <a class="btn btn-light btn-outline-dark d-block" href="{% url 'blog:profile' user.id %}">
                 View your profile
             </a>
         </div>

@@ -7,7 +7,6 @@ from django.template.defaultfilters import truncatechars
 class Blogger(models.Model):
     class Meta:
         ordering = ('user__username',)
-        permissions = [('can_approve_application', 'Can approve applications to be an author')]
     
     user = models.OneToOneField(
         User,

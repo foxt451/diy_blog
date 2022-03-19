@@ -1,0 +1,44 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<h3>User info</h3>
+{% if object == request.user or perms.auth.delete_user %}
+    <div>
+        <a class="btn btn-danger" href="{% url 'blog:profile-delete' object.id %}">Delete account</a>
+        <a class="btn btn-primary mx-3 px-4" href="{% url 'blog:profile-edit' object.id %}">Edit account</a>
+    </div>
+{% endif %}
+<hr>
+<h6>Username:</h6>
+<p class="text-wrap text-break"> {{ object.username }}</p>
+<hr>
+<h6>First name:</h6>
+<p class="text-wrap text-break">{{ object.first_name|default:'-' }}</p>
+<hr>
+<h6>Last name:</h6>
+<p class="text-wrap text-break">{{ object.last_name|default:'-' }}</p>
+<hr>
+<h6>Email:</h6>
+<p class="text-wrap text-break">{{ object.email|default:'-' }}</p>
+{% if object.blogger %}
+<hr>
+<h3>Author info</h3>
+{% if object.blogger.user == request.user or perms.blog.delete_blogger %}
+    <div>
+        <a class="btn btn-danger" href="{% url 'blog:blogger-delete' object.blogger.id %}">Resign as an author</a>
+        {% if object.blogger.user == request.user %}
+        <a class="btn btn-primary mx-3 px-4" href="{% url 'blog:blogger-edit' object.blogger.id %}">Edit author info</a>
+        {% endif %}
+    </div>
+{% endif %}
+<hr>
+<a href="{{ object.blogger.get_absolute_url }}">
+    <h6>Author card</h6>
+</a>
+<hr>
+<h6>Bio:</h6>
+<p class="text-wrap text-break">{{ object.blogger.bio }}</p>
+<hr>
+<h6>Blog posts:</h6>
+{{ object.blogger.blog_set.count }}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<h4>Delete account</h4>
+
+<p>
+    Are you sure you want to delete the account? The action is irreversible.
+    Consider disabling the account in the <a href="{% url 'blog:profile-edit' request.user.id %}">Edit</a> page. In both
+    cases you won't be able to log in again, though.
+    However, you will be able to contact the administration to renew the account in the future, and information about
+    you (like that you are the author of some blog or comment) will remain on the site.
+</p>
+
+
+<form action="" method="post" class="django-form">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" class="btn btn-danger" value="Resign">
+    </div>
+</form>
+{% endblock %}

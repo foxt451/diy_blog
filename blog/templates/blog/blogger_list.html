@@ -2,6 +2,7 @@
 {% block content %}
 <div class="d-flex flex-row flex-wrap statically-sized-cards justify-content-center align-items-stretch">
     {% for blogger in blogger_list %}
+    {% if blogger.blog_set.count > 0 %}
     <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
         <div class="card-header d-flex flex-row flex-wrap">
             <a href="{% url 'blog:blogger-detail' blogger.id %}"><h5 class="card-title text-wrap">{{ blogger.user.username|truncatechars:18 }}</h5></a>
@@ -23,6 +24,7 @@
             <a href="{{ blogger.get_last_blog.get_absolute_url }}" class="card-link d-inline-block">Last blog</a>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

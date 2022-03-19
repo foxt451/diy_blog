@@ -1,5 +1,16 @@
 from django.contrib import admin
+from django.contrib.auth import models as auth_models
 from . import models
+
+admin.site.register(auth_models.Permission)
+
+@admin.register(models.Application)
+class ApplicationAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'application_date',
+        'status'
+    )
 
 @admin.register(models.Blogger)
 class BloggerAdmin(admin.ModelAdmin):

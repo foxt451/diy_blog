@@ -44,7 +44,7 @@
             <div class="navbar-nav">
                 {% if request.user.is_authenticated %}
                 <div class="nav-item align-items-start">
-                <a class="btn btn-outline-warning text-wrap text-break" href="#">
+                <a class="btn btn-outline-warning text-wrap text-break" href="{% url 'blog:profile' user.id %}">
                     User:
                     {{ request.user.username | truncatechars:20 }}
                 </a>

@@ -1,0 +1,48 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<div class="d-flex flex-column align-items-stretch">
+    {% for application in application_list %}
+    <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
+        <div class="card-header">
+            <a href="{{ application.get_absolute_url }}">
+                <h5 class="card-title"># {{ application.id }}</h5>
+            </a>
+        </div>
+        <div class="card-body">
+            <h6>User</h6>
+            <p><a href="{% url 'blog:profile' application.user.id %}">{{ application.user }}</a></p>
+            <hr>
+            <h6>Motivation</h6>
+            <p>{{ application.motivation }}</a></p>
+            <h6>Suggested bio</h6>
+            <p>{{ application.bio }}</a></p>
+            <h6>Status</h6>
+            <p>{{ application.get_status_display }}</a></p>
+            {% if application.status == 'r' %}
+            <h6>Comment</h6>
+            <p>{{ application.comment|default:"-" }}</a></p>
+            {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            Sent on {{ application.application_date_time }}
+        </div>
+        {% if application.user == user or perms.blog.delete_application %}
+        <div class="card-footer">
+            <a class="btn btn-danger" href="{% url 'blog:application-delete' application.id %}">Delete</a>
+            {% if application.user == user %}
+            <a class="btn btn-primary mx-3 px-4" href="{% url 'blog:application-edit' application.id %}">Edit</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% if perms.blog.can_approve_application and application.status == 'w' %}
+        <div class="card-footer">
+            <a class="btn btn-warning" href="{% url 'blog:application-reject' application.id %}">Reject</a>
+            <a class="btn btn-success mx-3 px-4" href="{% url 'blog:application-accept' application.id %}">Accept</a>
+        </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    No applications yet
+    {% endfor %}
+</div>
+{% endblock  %}

@@ -27,6 +27,14 @@ urlpatterns = [
     path('profile/<int:pk>/delete/', views.UserDeleteView.as_view(), name='profile-delete'),
     
     path('application/create/', views.ApplicationCreateView.as_view(), name='application-create'),
+    path('applications/', views.ApplicationAllListView.as_view(), name='applications'),
+    path('applications/pending/', views.ApplicationPendingListView.as_view(), name='applications-pending'),
+    path('profile/<int:pk>/applications/', views.ApplicationUserListView.as_view(), name='applications-of-user'),
+    path('application/<int:pk>/', views.ApplicationDetailView.as_view(), name='application-detail'),
+    path('application/<int:pk>/delete/', views.ApplicationDeleteView.as_view(), name='application-delete'),
+    path('application/<int:pk>/edit/', views.ApplicationUpdateView.as_view(), name='application-edit'),
+    path('application/<int:pk>/reject/', views.ApplicationRejectView.as_view(), name='application-reject'),
+    path('application/<int:pk>/accept/', views.application_accept, name='application-accept'),
     
     path('garbage/', views.garbage, name='garbage')
 ]

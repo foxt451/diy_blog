@@ -8,7 +8,7 @@ admin.site.register(auth_models.Permission)
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = (
         'user',
-        'application_date',
+        'application_date_time',
         'status'
     )
 

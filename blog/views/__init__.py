@@ -5,3 +5,4 @@ from .user_views import UserDetailView, UserUpdateView, UserDeleteView
 from .application_views import ApplicationCreateView, ApplicationAllListView, \
     ApplicationPendingListView, ApplicationUserListView, \
         ApplicationDetailView, ApplicationDeleteView, ApplicationUpdateView, ApplicationRejectView, application_accept
+from .comment_views import CommentCreateView, CommentDeleteView

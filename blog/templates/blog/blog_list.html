@@ -5,10 +5,10 @@
     <div class="card mx-lg-3 mx-md-2 mx-1 my-2">
         <div class="card-header">
             <h5 class="card-title"><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:200 }}</a></h5>
-            <h6 class="card-subtitle mb-2 text-muted">by
+            <h6 class="card-subtitle mb-2 text-muted text-wrap text-break">by
                 {% if blog.author %} 
                 <a href="{{ blog.author.get_absolute_url }}">
-                    {{ blog.author|truncatechars:200 }}
+                    {{ blog.author|truncatechars:30 }}
                 </a>
                 {% else %}
                     <span class="text-danger">[deleted]</span>

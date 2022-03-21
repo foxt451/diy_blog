@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 
 class BlogListView(ListView):
     model = models.Blog
+    paginate_by = 5
 
     def get_queryset(self):
         if (pk := self.kwargs.get('pk', None)) is not None:

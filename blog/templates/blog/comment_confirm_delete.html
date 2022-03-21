@@ -1,0 +1,16 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<h4>Delete the comment</h4>
+
+<p>Are you sure you want to delete the comment?</p>
+
+<form action="" method="post" class="django-form">
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" class="btn btn-danger" value="Delete">
+    </div>
+</form>
+{% endblock %}

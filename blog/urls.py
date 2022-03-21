@@ -36,5 +36,8 @@ urlpatterns = [
     path('application/<int:pk>/reject/', views.ApplicationRejectView.as_view(), name='application-reject'),
     path('application/<int:pk>/accept/', views.application_accept, name='application-accept'),
     
+    path('blog/<int:blog_pk>/comment-create/', views.CommentCreateView.as_view(), name='comment-create'),
+    path('comment/<int:pk>/delete/', views.CommentDeleteView.as_view(), name='comment-delete'),
+    
     path('garbage/', views.garbage, name='garbage')
 ]

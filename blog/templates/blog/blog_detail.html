@@ -30,4 +30,38 @@
     </div>
     {% endif %}
 </div>
+
+<div class="mx-lg-3 mx-md-2 mx-1">
+    <h5>Comments</h5>
+    <a class="btn btn-primary mb-3" href="{% url 'blog:comment-create' blog.id %}">Add comment</a>
+    <br>
+    {% for comment in blog.comment_set.all %}
+    <hr>
+    <h6 class="text-wrap text-break">
+        {% if comment.commenter %}
+        {% if perms.auth.view_user %}
+        <a href="{% url 'blog:profile' comment.commenter.id %}">
+            {{ comment.commenter|truncatechars:30 }}
+        </a>
+        {% else %}
+        {{ comment.commenter|truncatechars:30 }}
+        {% endif %}
+        {% else %}
+        <span class="text-danger">[deleted]</span>
+        {% endif %}
+        :
+    </h6>
+    {{ comment.content }}
+    <br>
+    <span class="text-muted">
+        {{ comment.post_date }}
+    </span>
+    {% if comment.commenter == user or perms.blog.delete_comment %}
+    <br>
+    <a class="text-danger" href="{% url 'blog:comment-delete' comment.id %}">delete</a>
+    {% endif %}
+    {% empty %}
+    No comments yet
+    {% endfor %}
+</div>
 {% endblock  %}

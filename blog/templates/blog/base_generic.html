@@ -39,6 +39,12 @@
                     href="{% url 'blog:bloggers' %}" {% if active_url == 'bloggers' %}aria-current="page" {%endif%}>
                     Bloggers
                 </a>
+                {% if perms.blog.can_approve_application %}
+                <a class="nav-item nav-link {% if active_url == 'applications-pending' %}active{% endif %}"
+                    href="{% url 'blog:applications-pending' %}" {% if active_url == 'applications-pending' %}aria-current="page" {%endif%}>
+                    Review applications
+                </a>
+                {% endif %}
                 {% endwith %}
             </div>
             <div class="navbar-nav">
@@ -64,6 +70,27 @@
         {% comment %} container just for content, should be used almost always, doesn't affect layout {% endcomment %}
         {% block content %}
         {% endblock  %}
+        {% block pagination %}
+        {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links mx-auto">
+                {% if page_obj.has_previous %}
+                    <a class="text-success" href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                    <a class="text-success" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% endif %}
+        {% endblock %}
     </main>
     {% endblock  %}
 

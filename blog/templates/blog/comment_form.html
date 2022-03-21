@@ -1,0 +1,13 @@
+{% extends 'blog/base_generic.html' %}
+{% block content %}
+<form action="" method="post" class="django-form">
+    <h5 class="text-muted">Comment form</h5>
+    {% csrf_token %}
+    <div class="table-responsive">
+        <table class="table">
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Post">
+    </div>
+</form>
+{% endblock %}

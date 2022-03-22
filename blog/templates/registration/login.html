@@ -20,8 +20,13 @@
     <input type="hidden" name="next" value="{{ next }}">
 </form>
 <p class="mt-4">
-    <a href="{% url 'accounts:password_reset' %}">
+    <a href="{% url 'password_reset' %}">
         Lost password?
+    </a>
+</p>
+<p class="mt-4">
+    <a href="{% url 'blog:register' %}">
+        Don't have an account?
     </a>
 </p>
 {% endblock %}

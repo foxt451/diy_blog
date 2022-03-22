@@ -55,9 +55,10 @@
                     {{ request.user.username | truncatechars:20 }}
                 </a>
                 </div>
-                <a class="nav-item nav-link" href="{% url 'accounts:logout'%}">Log out</a>
+                <a class="nav-item nav-link" href="{% url 'logout'%}">Log out</a>
                 {% else %}
-                <a class="nav-item nav-link" href="{% url 'accounts:login'%}">Log in</a>
+                <a class="nav-item nav-link" href="{% url 'login'%}">Log in</a>
+                <a class="nav-item nav-link" href="{% url 'blog:register'%}">Sign up</a>
                 {% endif %}
             </div>
         </div>

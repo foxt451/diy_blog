@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'blog',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
 ]
 
 MIDDLEWARE = [
@@ -125,4 +125,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = reverse_lazy('blog:index')
-LOGIN_URL = reverse_lazy('accounts:login')
+LOGIN_URL = reverse_lazy('login')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -23,7 +23,7 @@ import django.contrib.auth.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('accounts/', include(([path('logout/', django.contrib.auth.views.logout_then_login, name='logout'),] +
-                               django.contrib.auth.urls.urlpatterns, 'accounts'))),
+    path('accounts/', include([path('logout/', django.contrib.auth.views.logout_then_login, name='logout'),] +
+                               django.contrib.auth.urls.urlpatterns)),
 
 ]

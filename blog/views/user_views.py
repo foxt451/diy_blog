@@ -1,10 +1,12 @@
 from re import template
 from django.contrib.auth.models import User
-from django.views.generic import DetailView, View
+from django.views.generic import DetailView, View, FormView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
 
 class UserDetailView(UserPassesTestMixin, DetailView):
@@ -46,3 +48,20 @@ class UserDeleteView(UserPassesTestMixin, DeleteView):
     def test_func(self):
         user = self.get_object()
         return user == self.request.user or 'auth.delete_user' in self.request.user.get_all_permissions()
+
+class SignUpForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    email = forms.EmailField(max_length=254, help_text='Required')
+    
+    class Meta(UserCreationForm.Meta):
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email')
+    
+class SignUpView(FormView):
+    form_class = SignUpForm
+    template_name = 'registration/register.html'
+    success_url = reverse_lazy('login')
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

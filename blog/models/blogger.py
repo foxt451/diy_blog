@@ -1,15 +1,15 @@
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.template.defaultfilters import truncatechars
+from django.conf import settings
 
 class Blogger(models.Model):
     class Meta:
         ordering = ('user__username',)
     
     user = models.OneToOneField(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text='User that is going to be an author'
     )

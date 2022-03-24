@@ -1,5 +1,5 @@
+from operator import ge
 from re import template
-from django.contrib.auth.models import User
 from django.views.generic import DetailView, View, FormView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import DetailView, UpdateView, DeleteView
@@ -7,10 +7,11 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth import get_user_model
 
 
 class UserDetailView(UserPassesTestMixin, DetailView):
-    model = User
+    model = get_user_model()
     template_name = 'blog/user_detail.html'
     
     def test_func(self):
@@ -18,7 +19,7 @@ class UserDetailView(UserPassesTestMixin, DetailView):
         return user == self.request.user or 'auth.view_user' in self.request.user.get_all_permissions()
     
 class UserUpdateView(UserPassesTestMixin, UpdateView):
-    model = User
+    model = get_user_model()
     fields = ('username', 'first_name', 'last_name', 'email', 'is_active')
     template_name = 'blog/user_form.html'
     
@@ -40,7 +41,7 @@ class UserUpdateView(UserPassesTestMixin, UpdateView):
         return user == self.request.user or 'auth.delete_user' in self.request.user.get_all_permissions()
     
 class UserDeleteView(UserPassesTestMixin, DeleteView):
-    model = User
+    model = get_user_model()
     success_url = reverse_lazy('blog:index')
     template_name = 'blog/user_confirm_delete.html'
 
@@ -55,6 +56,7 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, help_text='Required')
     
     class Meta(UserCreationForm.Meta):
+        model = get_user_model()
         fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email')
     
 class SignUpView(FormView):

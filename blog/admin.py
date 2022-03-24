@@ -2,6 +2,11 @@ from django.contrib import admin
 from django.contrib.auth import models as auth_models
 from . import models
 
+from django.contrib.auth.admin import UserAdmin
+from blog.models import User
+
+admin.site.register(User, UserAdmin)
+
 admin.site.register(auth_models.Permission)
 
 @admin.register(models.Application)

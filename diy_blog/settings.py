@@ -128,3 +128,5 @@ LOGIN_REDIRECT_URL = reverse_lazy('blog:index')
 LOGIN_URL = reverse_lazy('login')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTH_USER_MODEL = 'blog.User'

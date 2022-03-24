@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
 from django.urls import reverse
+from django.conf import settings
 
 
 class Application(models.Model):
@@ -13,7 +13,7 @@ class Application(models.Model):
     application_date_time = models.DateTimeField(help_text='When the application was sent for consideration',
                                         auto_now_add=True)
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text='User that wants to be an author',
     )

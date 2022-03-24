@@ -1,7 +1,7 @@
 from django.db import models
 from .blog import Blog
-from django.contrib.auth.models import User
 from django.template.defaultfilters import truncatechars
+from django.conf import settings
 
 
 class Comment(models.Model):
@@ -15,7 +15,7 @@ class Comment(models.Model):
     )
     
     commenter = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
         help_text='The person commenting on the blog'

@@ -39,7 +39,7 @@
     <hr>
     <h6 class="text-wrap text-break">
         {% if comment.commenter %}
-        {% if perms.auth.view_user %}
+        {% if perms.blog.view_user %}
         <a href="{% url 'blog:profile' comment.commenter.id %}">
             {{ comment.commenter|truncatechars:30 }}
         </a>

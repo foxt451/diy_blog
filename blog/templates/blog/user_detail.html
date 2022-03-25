@@ -1,7 +1,7 @@
 {% extends 'blog/base_generic.html' %}
 {% block content %}
 <h3>User info</h3>
-{% if object == request.user or perms.auth.delete_user %}
+{% if object == request.user or perms.blog.delete_user %}
     <div>
         <a class="btn btn-danger" href="{% url 'blog:profile-delete' object.id %}">Delete account</a>
         <a class="btn btn-primary mx-3 px-4" href="{% url 'blog:profile-edit' object.id %}">Edit account</a>

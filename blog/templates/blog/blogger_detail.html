@@ -3,7 +3,7 @@
 <div class="card mx-lg-3 mx-md-2 mx-1 my-2 align-self-stretch">
     <div class="card-header flex-wrap">
         <p class="card-title h5">{{ blogger.user.username }}</p>
-        {% if user == blogger.user or perms.auth.view_user %}
+        {% if user == blogger.user or perms.blog.view_user %}
         <p><a href="{% url 'blog:profile' blogger.user.id %}">View profile</a></p>
         {% endif %}
         <span class="text-muted ms-auto">blogs written: {{ blogger.blog_set.count }}</spam>

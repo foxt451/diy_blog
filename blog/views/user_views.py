@@ -16,7 +16,7 @@ class UserDetailView(UserPassesTestMixin, DetailView):
     
     def test_func(self):
         user = self.get_object()
-        return user == self.request.user or 'auth.view_user' in self.request.user.get_all_permissions()
+        return user == self.request.user or 'blog.view_user' in self.request.user.get_all_permissions()
     
 class UserUpdateView(UserPassesTestMixin, UpdateView):
     model = get_user_model()
@@ -38,7 +38,7 @@ class UserUpdateView(UserPassesTestMixin, UpdateView):
     # the person who can delete users can also edit, but only is_active part, it's taken care of in setup(...)
     def test_func(self):
         user = self.get_object()
-        return user == self.request.user or 'auth.delete_user' in self.request.user.get_all_permissions()
+        return user == self.request.user or 'blog.delete_user' in self.request.user.get_all_permissions()
     
 class UserDeleteView(UserPassesTestMixin, DeleteView):
     model = get_user_model()
@@ -48,7 +48,7 @@ class UserDeleteView(UserPassesTestMixin, DeleteView):
     # only the original author and a moderator (or anyone having a perm to delete users) can delete
     def test_func(self):
         user = self.get_object()
-        return user == self.request.user or 'auth.delete_user' in self.request.user.get_all_permissions()
+        return user == self.request.user or 'blog.delete_user' in self.request.user.get_all_permissions()
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
